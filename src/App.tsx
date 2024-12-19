@@ -39,14 +39,16 @@ function App() {
 
   const checkFibonacciSequence = () => {
     // Check horizontal sequences
-    for (let k = 0; k <= GRID_SIZE; k++) {
-      for (let i = 0; i <= GRID_SIZE - 5; i++) {
-        const sequence = grid[k].slice(i, i + 5).map((cell) => cell.value);
+    for (let row = 0; row < GRID_SIZE; row++) {
+      for (let col = 0; col <= GRID_SIZE - 5; col++) {
+        const sequence = grid[row]
+          .slice(col, col + 5)
+          .map((cell) => cell.value);
         if (isFibonacci(sequence)) {
           const newGrid = [...grid];
           for (let j = 0; j < 5; j++) {
-            newGrid[k][i + j] = {
-              ...newGrid[k][i + j],
+            newGrid[row][col + j] = {
+              ...newGrid[row][col + j],
               isAnimatingGreen: true,
               value: 0,
             };
@@ -57,8 +59,8 @@ function App() {
             setGrid((prev) => {
               const resetGrid = [...prev];
               for (let j = 0; j < 5; j++) {
-                resetGrid[k][i + j] = {
-                  ...resetGrid[k][i + j],
+                resetGrid[row][col + j] = {
+                  ...resetGrid[row][col + j],
                   isAnimatingGreen: false,
                 };
               }
@@ -70,14 +72,18 @@ function App() {
     }
 
     // Check vertical sequences
-    for (let k = 0; k < GRID_SIZE; k++) {
-      for (let i = 0; i <= GRID_SIZE - 5; i++) {
-        const sequence = grid.slice(i, i + 5).map((row) => row[k].value);
+    for (let col = 0; col < GRID_SIZE; col++) {
+      for (let row = 0; row <= GRID_SIZE - 5; row++) {
+        // Create vertical sequence
+        const sequence = Array(5)
+          .fill(0)
+          .map((_, i) => grid[row + i][col].value);
+
         if (isFibonacci(sequence)) {
           const newGrid = [...grid];
           for (let j = 0; j < 5; j++) {
-            newGrid[i + j][k] = {
-              ...newGrid[i + j][k],
+            newGrid[row + j][col] = {
+              ...newGrid[row + j][col],
               isAnimatingGreen: true,
               value: 0,
             };
@@ -88,8 +94,8 @@ function App() {
             setGrid((prev) => {
               const resetGrid = [...prev];
               for (let j = 0; j < 5; j++) {
-                resetGrid[i + j][k] = {
-                  ...resetGrid[i + j][k],
+                resetGrid[row + j][col] = {
+                  ...resetGrid[row + j][col],
                   isAnimatingGreen: false,
                 };
               }
