@@ -1,0 +1,56 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6;
+  padding: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(50, minmax(0, 1fr));
+  gap: 1px;
+  background-color: #d1d5db;
+  padding: 4px;
+}
+
+.cell {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cell:hover {
+  background-color: #e5e7eb;
+}
+
+.cell.has-value {
+  background-color: #dbeafe;
+}
+
+@keyframes yellow-highlight {
+  0%, 100% { background-color: inherit; }
+  50% { background-color: #fef08a; }
+}
+
+@keyframes green-highlight {
+  0%, 100% { background-color: inherit; }
+  50% { background-color: #86efac; }
+}
+
+.animate-yellow {
+  animation: yellow-highlight 1s ease-in-out;
+}
+
+.animate-green {
+  animation: green-highlight 1s ease-in-out;
+}
